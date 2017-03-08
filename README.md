@@ -8,7 +8,7 @@ The app UI introspects pods in its own namespace, including itself.
 
 ```
 npm install
-npm start
+npm run local
 ```
 
 This starts the app outside Kubernetes and expects Kubernetes API to be available at [http://127.0.0.1:8001](http://127.0.0.1:8001).

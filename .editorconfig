@@ -10,6 +10,10 @@ insert_final_newline = true
 [{*.json,.*rc}]
 indent_size = 2
 
+[{Makefile,**.mk}]
+indent_style = tab
+indent_size = 4
+
 [*.md]
 indent_size = 2
 trim_trailing_whitespace = false

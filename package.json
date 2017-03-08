@@ -18,6 +18,7 @@
     "node": ">=7"
   },
   "scripts": {
-    "start": "KUBE_API='http://127.0.0.1:8001' node src/server.js"
+    "start": "node src/server.js",
+    "local": "KUBE_API='http://127.0.0.1:8001' npm start"
   }
 }
