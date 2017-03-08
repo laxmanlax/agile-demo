@@ -1,27 +1,16 @@
 {
-  "plugins": [
-    "react"
-  ],
   "extends": [
-    "../.eslintrc.json",
-    "plugin:react/recommended"
+    "../.eslintrc.json"
   ],
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
   "env": {
     "browser": true,
     "node": false
   },
   "rules": {
-    "no-console": "error",
-    "react/prop-types": "off"
+    "no-console": "error"
   },
   "globals": {
     "axios": false,
-    "React": false,
-    "ReactDOM": false
+    "Handlebars": false
   }
 }
