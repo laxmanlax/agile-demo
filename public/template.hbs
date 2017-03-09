@@ -2,7 +2,9 @@
     {{#each this}}
     <li>
         <div class="cluster-item">
-            <img src="/image/{{metadata.name}}"/>
+            <img src="/image/{{metadata.name}}"
+                 onload="this.style.visibility='visible';"
+                 onerror="this.style.visibility='hidden';"/>
             <dl>
                 <dt>Name</dt>
                 <dd>{{metadata.name}}</dd>

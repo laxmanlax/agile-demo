@@ -1,6 +1,5 @@
 const client = require('./client');
 const express = require('express');
-const request = require('request');
 
 const ns = process.env.KUBERNETES_NAMESPACE || 'default';
 
@@ -24,7 +23,7 @@ app.get('/image/:id', (req, res) => {
         if (image && !err) {
             client.get({url: `proxy/namespaces/${ns}/pods/${id}/${image}`, json: false}).pipe(res);
         } else {
-            request(`https://api.adorable.io/avatars/200/${id}.png`).pipe(res);
+            res.sendStatus(404);
         }
     });
 });
