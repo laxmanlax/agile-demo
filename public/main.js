@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
         Promise.all([templateRequest, axios.get('/cluster')])
             .then(([template, {data}]) => {
                 container.innerHTML = template(data);
-                setTimeout(refresh, 1000);
             });
     }
 
+    setInterval(refresh, 1000);
     refresh();
 });
