@@ -10,6 +10,7 @@
     "no-console": "error"
   },
   "globals": {
+    "_": false,
     "axios": false,
     "Handlebars": false
   }

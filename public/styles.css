@@ -1,8 +1,9 @@
 body {
-    background-color: #ddd;
+    background-color: #17baef;
     margin: 0;
     padding: 20px;
     font-family: "Helvetica Neue", Helvetica, sans-serif;
+    color: #514d6a;
 }
 
 .cluster-items {
@@ -16,9 +17,8 @@ body {
 .cluster-item {
     flex: 1;
     width: 300px;
-    background-color: #fff;
-    border-radius: 3px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+    background-color: #55d5ff;
+    border-radius: 10px;
     margin: 20px;
     padding: 20px;
 }
@@ -37,13 +37,13 @@ body {
 
 .cluster-item dl dt {
     float: left;
-    width: 60px;
-    color: #aaa;
+    width: 70px;
+    font-weight: bold;
 }
 
 .cluster-item dl dd {
-    margin-left: 60px;
-    margin-bottom: 5px;
+    margin-left: 70px;
+    margin-bottom: 10px;
 }
 
 .cluster-item-labels {
@@ -52,5 +52,4 @@ body {
 
 .cluster-item-label em {
     font-style: normal;
-    color: #777;
 }

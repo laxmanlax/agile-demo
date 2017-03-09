@@ -4,10 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const templateRequest = axios.get('/template.hbs')
         .then(({data}) => Handlebars.compile(data));
 
+    let model;
     function refresh() {
         Promise.all([templateRequest, axios.get('/cluster')])
             .then(([template, {data}]) => {
-                container.innerHTML = template(data);
+                if (!_.isEqual(model, data.items)) {
+                    model = data.items;
+                    container.innerHTML = template(model);
+                }
             });
     }
 

@@ -6,7 +6,7 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.15.2",
-    "kubernetes-client": "^3.10.0"
+    "request": "^2.80.0"
   },
   "devDependencies": {
     "eslint": "^3.17.1",
@@ -18,6 +18,6 @@
   },
   "scripts": {
     "start": "node src/server.js",
-    "local": "KUBE_API='http://127.0.0.1:8001' npm start"
+    "local": "KUBERNETES_PROXY_URL='http://127.0.0.1:8001' npm start"
   }
 }
