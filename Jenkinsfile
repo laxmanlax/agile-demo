@@ -49,8 +49,29 @@ podTemplate(
                     version: version
                 ]
                 writeFile file: "deployment.${namespace}.yaml", text: deployment
-                sh "kubectl apply -f ./deployment.${namespace}.yaml --namespace '$namespace'"
+                sh "kubectl apply -f ./deployment.${namespace}.yaml -n '$namespace'"
             }
         }
+        stage('Verify') {
+            container('kubectl') {
+                def namespace = "$app"
+                try {
+                    sh """
+                    for i in `seq 20`; do
+                        kubectl rollout status deployments update-demo \\
+                            -n '$namespace' \\
+                            --watch=false \\
+                            | grep 'rolled out' > status && break
+                        sleep 1
+                    done
+                    cat status | grep 'rolled out'
+                    """
+                } catch (err) {
+                    sh "kubectl rollout undo deployment update-demo -n '$namespace'"
+                    throw err
+                }
+            }
+        }
+
     }
 }
