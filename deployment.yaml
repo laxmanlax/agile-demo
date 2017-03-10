@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: demo
+  name: $namespace
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: k8s-demo-app
-  namespace: demo
+  namespace: $namespace
   labels:
     app: k8s-demo-app
 spec:
@@ -35,7 +35,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: k8s-demo-app
-  namespace: demo
+  namespace: $namespace
   labels:
     app: k8s-demo-app
 spec:
@@ -49,12 +49,12 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: k8s-demo-app
-  namespace: demo
+  namespace: $namespace
   labels:
     app: k8s-demo-app
 spec:
   rules:
-  - host: demo.app.bulochka.kubernetes.delivery
+  - host: $host
     http:
       paths:
       - path: /
@@ -66,11 +66,11 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: update-demo
-  namespace: demo
+  namespace: $namespace
   labels:
     app: update-demo
 spec:
-  replicas: 3
+  replicas: $replicas
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -85,11 +85,11 @@ spec:
       name: update-demo
       labels:
         app: update-demo
-        version: nautilus
+        version: $version
     spec:
       containers:
       - name: update-demo
-        image: gcr.io/google_containers/update-demo:nautilus
+        image: gcr.io/google_containers/update-demo:$version
         ports:
         - name: http
           containerPort: 80
