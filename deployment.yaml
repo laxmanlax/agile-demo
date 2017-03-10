@@ -26,7 +26,7 @@ spec:
         image: agilestacks/k8s-demo-app
         env:
         - name: KUBERNETES_NAMESPACE
-          value: demo
+          value: $namespace
         ports:
         - name: http
           containerPort: 3000
