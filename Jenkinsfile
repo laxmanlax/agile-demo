@@ -8,7 +8,7 @@ def render(template, bindings = [:]) {
         .toString()
 }
 
-def app = 'update-demo'
+def app = 'agile-demo'
 def host
 
 node('master') {
@@ -21,7 +21,7 @@ node('master') {
 
 podTemplate(
     inheritFrom: 'agilestacks',
-    label: 'update-demo',
+    label: 'agile-demo',
     containers: [
         containerTemplate(
             name: 'kubectl',
@@ -37,12 +37,13 @@ podTemplate(
         )
     ]
 ) {
-    node('update-demo') {
+    node('agile-demo') {
         stage('Deploy') {
             container('kubectl') {
                 def namespace = "$app"
                 def template = readFile 'deployment.yaml'
                 def deployment = render template, [
+                    app: app,
                     namespace: namespace,
                     host: host,
                     replicas: replicas,
@@ -58,7 +59,7 @@ podTemplate(
                 try {
                     sh """
                     for i in `seq 20`; do
-                        kubectl rollout status deployments update-demo \\
+                        kubectl rollout status deployment agile-demo \\
                             -n '$namespace' \\
                             --watch=false \\
                             | grep 'rolled out' > status && break
@@ -67,7 +68,7 @@ podTemplate(
                     cat status | grep 'rolled out'
                     """
                 } catch (err) {
-                    sh "kubectl rollout undo deployment update-demo -n '$namespace'"
+                    sh "kubectl rollout undo deployment agile-demo -n '$namespace'"
                     throw err
                 }
             }
