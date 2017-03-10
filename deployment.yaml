@@ -6,24 +6,24 @@ metadata:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: k8s-demo-app
+  name: agile-demo
   namespace: $namespace
   labels:
-    app: k8s-demo-app
+    app: agile-demo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: k8s-demo-app
+      app: agile-demo
   template:
     metadata:
-      name: k8s-demo-app
+      name: agile-demo
       labels:
-        app: k8s-demo-app
+        app: agile-demo
     spec:
       containers:
-      - name: k8s-demo-app
-        image: agilestacks/k8s-demo-app
+      - name: agile-demo
+        image: agilestacks/agile-demo
         env:
         - name: KUBERNETES_NAMESPACE
           value: $namespace
@@ -34,24 +34,24 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: k8s-demo-app
+  name: agile-demo
   namespace: $namespace
   labels:
-    app: k8s-demo-app
+    app: agile-demo
 spec:
   ports:
   - port: 80
     targetPort: http
   selector:
-    app: k8s-demo-app
+    app: agile-demo
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: k8s-demo-app
+  name: agile-demo
   namespace: $namespace
   labels:
-    app: k8s-demo-app
+    app: agile-demo
 spec:
   rules:
   - host: $host
@@ -59,7 +59,7 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: k8s-demo-app
+          serviceName: agile-demo
           servicePort: 80
 ---
 apiVersion: extensions/v1beta1
