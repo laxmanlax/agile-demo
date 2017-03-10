@@ -59,7 +59,7 @@ podTemplate(
                 try {
                     sh """
                     for i in `seq 20`; do
-                        kubectl rollout status deployment agile-demo \\
+                        kubectl rollout status deployment update-demo \\
                             -n '$namespace' \\
                             --watch=false \\
                             | grep 'rolled out' > status && break
@@ -68,7 +68,7 @@ podTemplate(
                     cat status | grep 'rolled out'
                     """
                 } catch (err) {
-                    sh "kubectl rollout undo deployment agile-demo -n '$namespace'"
+                    sh "kubectl rollout undo deployment update-demo -n '$namespace'"
                     throw err
                 }
             }
