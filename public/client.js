@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const templateRequest = axios.get('/template.hbs')
         .then(({data}) => Handlebars.compile(data));
 
+    const configRequest = axios.get('/config')
+        .then(({data}) => data);
+
     function handleClusterItems() {
         document.querySelectorAll('.cluster-item').forEach((item) => {
             const image = item.querySelector('img');
@@ -15,10 +18,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let model;
     function refresh() {
-        Promise.all([templateRequest, axios.get('/cluster')])
-            .then(([template, {data}]) => {
-                if (!_.isEqual(model, data.items)) {
-                    model = data.items;
+        Promise.all([configRequest, templateRequest, axios.get('/cluster')])
+            .then(([config, template, {data}]) => {
+                let items = data.items;
+                if (!config.showSelf) {
+                    items = items.filter((item) => {
+                        const image = _.get(item, 'spec.containers[0].image') || '';
+                        return !image.startsWith(config.self);
+                    });
+                }
+                if (!_.isEqual(model, items)) {
+                    model = items;
                     container.innerHTML = template(model);
                     handleClusterItems();
                 }

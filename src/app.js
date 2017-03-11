@@ -1,10 +1,19 @@
 const kube = require('./kube');
 const express = require('express');
+const pkg = require('../package.json');
 
 const ns = process.env.KUBERNETES_NAMESPACE || 'default';
 
 const app = express();
 app.use(express.static(`${__dirname}/../public`));
+
+app.get('/config', (req, res) => {
+    res.send({
+        version: pkg.version,
+        showSelf: JSON.parse(process.env.UI_SHOW_SELF || 'false'),
+        self: process.env.UI_SELF || 'agilestacks/agile-demo'
+    });
+});
 
 app.get('/cluster', (req, res) => {
     kube.get(`namespaces/${ns}/pods`, (err, r, data) => {
