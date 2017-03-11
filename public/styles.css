@@ -83,3 +83,14 @@ body {
 .cluster-item-label em {
     font-style: normal;
 }
+
+.no-items {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    background-color: #55d5ff;
+    border-radius: 10px;
+    padding: 20px;
+}

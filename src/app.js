@@ -10,6 +10,7 @@ app.use(express.static(`${__dirname}/../public`));
 app.get('/config', (req, res) => {
     res.send({
         version: pkg.version,
+        namespace: ns,
         showSelf: JSON.parse(process.env.UI_SHOW_SELF || 'false'),
         self: process.env.UI_SELF || 'agilestacks/agile-demo'
     });

@@ -1,5 +1,6 @@
+{{#if model.length}}
 <ul class="cluster-items">
-    {{#each this}}
+    {{#each model}}
     <li>
         <div class="cluster-item">
             <img src="/image/{{metadata.name}}"/>
@@ -29,3 +30,6 @@
     </li>
     {{/each}}
 </ul>
+{{else}}
+<div class="no-items">No observable pods in '{{config.namespace}}' namespace.</div>
+{{/if}}

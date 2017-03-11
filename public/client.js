@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 if (!_.isEqual(model, items)) {
                     model = items;
-                    container.innerHTML = template(model);
+                    container.innerHTML = template({config, model});
                     handleClusterItems();
                 }
             });
